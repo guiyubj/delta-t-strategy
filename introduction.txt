@@ -1,4 +1,4 @@
-This is a introduction file to this strategy
+This is an introductory file to the strategy
 
 #introduction
 #Yu Gui
@@ -6,7 +6,8 @@ This is a introduction file to this strategy
 #Quantitative Investment Division
 #7/25/2016
 
-Delta-t portfolio strategy
+Intro:
+
 Delta-t portfolio strategy is inspired by BoA Merrill Lynch's investment clock theory. According to investment clock theory, the economical phases may affect returns among asset classes (stock, bond, cash...). Investment clock theory specified four phases of economy: reflation, recover, overheat and stagnation. 
 Reflation:  economic growth rate down, inflation rate down;
 Recover:  economic growth rate up, inflation down;
@@ -19,7 +20,19 @@ Similarly, S&P500 components (沪深300 for China Market) can be classified into
 
 We assume that the current phase may affect a certain industry's current excess return (current return of the industry investment - current return of the overall market). With the change of economic phase, the expectation of excess return of a industry is also changed. Thus, with the change of economic phase, the excess return of a certain industry may go beyond its historical mean (when the economic stage have positive effects on the industry), and may go below its historical mean (when the economic stage have negative effects on the industry). 
 
+------------------------------------------------------------------------------------------
 
-Delta-t portfolio strategy is based on following assumptions:
-1. The excess return of a certain industry (return of the industry investment - return of the overall market) have the tendency to converge to its historical mean. 
-2. 
+Delta-t portfolio strategy:
+
+The assumptions of Delta-t portfolio strategy:
+1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) have the tendency to converge to its historical mean. 
+2. The excess returns of investments in different industries move in a oscillatory fashion.
+3. The numerical values of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
+
+The return of Delta-t portfolio strategy:
+Return of portfolio = Excess Return of industry j - Excess Return of industry i.
+(In desirable scenario, the Excess Return of industry j should be higher than its historical mean while the Excess Return of industry i should be lower than its historical mean, so that the return of portfolio should be positive)
+
+The methodology of Delta-t portfolio strategy:
+
+

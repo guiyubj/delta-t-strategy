@@ -1,0 +1,22 @@
+#program structure
+#Yu Gui
+#China Asset Management Co.
+#Quantitative Investment Division
+#7/25/2016
+
+
+dt_start
+initialize programs, call source() to source each of the needed source files
+initialize WindR API and print the connection status with Wind server
+
+dt_run
+run the process as documented in methodology section in 'introduction.txt'
+
+find_corr_delta_matrix
+find a 3-D matrix with three axis. 
+Aixs one: a vector of industry index
+Axis two: a vector of industry index (exactly same as axis one)
+Axis three: delta-t (the time shifted between two timeseries)
+
+The meaning of a point in the matrix: x = A('Finance', 'Energy', 66) :
+point x in the matrix holds an numerical value, which represents the correlation between two timeseries(Finance index close price, and Energy index close price)
