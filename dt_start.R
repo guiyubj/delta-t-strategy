@@ -13,8 +13,8 @@ source('./get_Wind_data.r')
 source('./find_delta_t.r')
 source('./find_corr_delta_t_matrix.r')
 
-print('Getting data...')
-w_wsd_data = get_data()
-print('Done')
+# print('Getting data...')
+# w_wsd_data = get_data()
+# print('Done')
 
 

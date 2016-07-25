@@ -57,7 +57,8 @@ get_industry_index_list <- function(str_idx = 'scd') {
 
 #function: get data from Wind Terminal
 #library WindR must be loaded and w.isconnected() must return True for this function to work properly
-get_data <- function(vec_idx_code = get_industry_index_list()) {
+get_data <- function(idx = 'scd') {
+  vec_idx_code = get_industry_index_list(idx)
   w_wsd_data<-w.wsd(paste(vec_idx_code, sep = ','),"close","ED-10Y","2016-07-20","Fill=Previous")
   return(w_wsd_data)
 }
