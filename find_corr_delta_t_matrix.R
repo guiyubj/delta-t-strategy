@@ -31,9 +31,10 @@ find_corr_delta_t_matrix <- function(w_wsd_data, max_dt = 180, idx = 'scd') {
       }
       else {
         #else proceed with correlation calculation
-        mat_corr[i, j] = find_delta_t_corr(w_wsd_data$Data[i + 1][ , 1],
-                                           w_wsd_data$Data[j + 1][ , 1],
-                                           max_delta_t)[2]
+        mat_corr[i, j] = max(ccf(w_wsd_data$Data[i + 1][ , 1],
+                                 w_wsd_data$Data[j + 1][ , 1],
+                                 max_delta_t, 
+                                 plot = F)$acf)
       }
     }
   }

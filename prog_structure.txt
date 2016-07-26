@@ -14,9 +14,9 @@ run the process as documented in methodology section in 'introduction.txt'
 
 find_corr_delta_matrix
 find a 3-D matrix with three axis. 
-Aixs one: a vector of industry index
+Axis one: a vector of industry index
 Axis two: a vector of industry index (exactly same as axis one)
-Axis three: delta-t (the time shifted between two timeseries)
+Axis three: delta-t (the time shifted between two time series)
 
-The meaning of a point in the matrix: x = A('Finance', 'Energy', 66) :
-point x in the matrix holds an numerical value, which represents the correlation between two timeseries(Finance index close price, and Energy index close price)
+A point in the matrix: x = A('Finance', 'Energy', 66) represent: 
+the correlation between two time series(Finance index close price, and Energy index close price), when the two time series are shifted by 66 days.

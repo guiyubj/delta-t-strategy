@@ -8,7 +8,7 @@ This is an introductory file to the strategy
 
 Intro:
 
-Delta-t portfolio strategy is inspired by BoA Merrill Lynch's investment clock theory. According to investment clock theory, the economical phases may affect returns among asset classes (stock, bond, cash...). Investment clock theory specified four phases of economy: reflation, recover, overheat and stagnation. 
+Delta-t portfolio strategy is inspired by BoA Merrill Lynch's investment clock theory. According to investment clock theory, the economical phases may affect returns among asset classes (stock, bond, cash...). Investment clock theory specifies four economic phases: reflation, recover, overheat and stagnation. 
 Reflation:  economic growth rate down, inflation rate down;
 Recover:  economic growth rate up, inflation down;
 Overheat:   economic growth rate up, inflation up;
@@ -25,9 +25,9 @@ We assume that the current phase may affect a certain industry's current excess 
 Delta-t portfolio strategy:
 
 The assumptions of Delta-t portfolio strategy:
-1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) have the tendency to converge to its historical mean. 
+1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) has the tendency to converge to its historical mean. 
 2. The excess returns of investments in different industries move in a oscillatory fashion.
-3. The numerical values of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
+3. The ratios of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
 
 The return of Delta-t portfolio strategy:
 Return of portfolio = Excess Return of industry j - Excess Return of industry i.

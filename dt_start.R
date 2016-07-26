@@ -10,7 +10,6 @@ cat('Connection status:', w.isconnected(), '\n')
 source('./get_Wind_data.r')
 
 #import functions
-source('./find_delta_t.r')
 source('./find_corr_delta_t_matrix.r')
 
 # print('Getting data...')

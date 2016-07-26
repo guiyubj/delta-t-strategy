@@ -13,6 +13,7 @@ max_dt = 100 #maximum time delay between two timeseries
 #get data
 print('Getting data...')
 w_wsd_data = get_data(str_idx)
+w_sh_data = get_data('sh')
 print('Done')
 
 #calc corr_dt_matrix
