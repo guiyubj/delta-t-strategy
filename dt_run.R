@@ -14,13 +14,21 @@ max_dt = 100 #maximum time delay between two timeseries
 print('Getting data...')
 w_wsd_data = get_data(str_idx)
 w_sh_data = get_data('sh')
+excess_return_data = calc_excess_return(w_wsd_data, w_sh_data)
 print('Done')
 
 #calc corr_dt_matrix
 print('Calculating corr_dt_matrix...')
-corr_dt_matrix = find_corr_delta_t_matrix(w_wsd_data, max_dt, str_idx)
+#get the list of cross-correlation matrix and delta-t matrix
+lst_mat_ccor_dt = find_corr_delta_t_matrix(excess_return_data, w_sh_data, max_dt, str_idx)
+#extract cross-correlation matrix
+mat_ccor = lst_mat_ccor_dt[1]
+#extract delta-t matrix
+mat_dt = lst_mat_ccor_dt[2]
+
 print('Done')
-#write the matrix to csv
-str_csv_name = paste('./result/corr_dt_matrix_', str_idx, max_dt, '.csv', sep = '')
-write.csv(corr_dt_matrix, str_csv_name)
+#write the matrices to csv
+str_csv_name = paste('./result/cross_corr_dt_matrix_', str_idx, max_dt, '.csv', sep = '')
+write.csv(lst_mat_ccor_dt, str_csv_name)
 print(paste('Written to CSV:', str_csv_name))
+

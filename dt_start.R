@@ -7,10 +7,11 @@
 library(WindR)
 w.start()
 cat('Connection status:', w.isconnected(), '\n')
-source('./get_Wind_data.r')
+source('./get_Wind_data.R')
 
 #import functions
-source('./find_corr_delta_t_matrix.r')
+source('./calc_excess_return.R')
+source('./find_corr_delta_t_matrix.R')
 
 # print('Getting data...')
 # w_wsd_data = get_data()
