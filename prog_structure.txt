@@ -18,5 +18,5 @@ Axis one: a vector of industry index
 Axis two: a vector of industry index (exactly same as axis one)
 Axis three: delta-t (the time shifted between two time series)
 
-A point in the matrix: x = A('Finance', 'Energy', 66) represent: 
+A point in the matrix: x = A$'Finance'$'Energy'[66] represent: 
 the correlation between two time series(Finance index close price, and Energy index close price), when the two time series are shifted by 66 days.

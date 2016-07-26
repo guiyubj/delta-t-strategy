@@ -8,7 +8,7 @@ This is an introductory file to the strategy
 
 Intro:
 
-Delta-t portfolio strategy is inspired by BoA Merrill Lynch's investment clock theory. According to investment clock theory, the economical phases may affect returns among asset classes (stock, bond, cash...). Investment clock theory specifies four economic phases: reflation, recover, overheat and stagnation. 
+Delta-t portfolio strategy is inspired by BoA Merrill Lynch's investment clock theory. According to investment clock theory, the economic phases may affect returns among asset classes (stock, bond, cash...). Investment clock theory specifies four economic phases: reflation, recover, overheat and stagnation. 
 Reflation:  economic growth rate down, inflation rate down;
 Recover:  economic growth rate up, inflation down;
 Overheat:   economic growth rate up, inflation up;
@@ -24,15 +24,51 @@ We assume that the current phase may affect a certain industry's current excess 
 
 Delta-t portfolio strategy:
 
+------------------------------------------------------------------------------------------
+
 The assumptions of Delta-t portfolio strategy:
 1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) has the tendency to converge to its historical mean. 
-2. The excess returns of investments in different industries move in a oscillatory fashion.
+2. The excess returns of investments in industries move in a oscillatory fashion.
 3. The ratios of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
+
+------------------------------------------------------------------------------------------
 
 The return of Delta-t portfolio strategy:
 Return of portfolio = Excess Return of industry j - Excess Return of industry i.
 (In desirable scenario, the Excess Return of industry j should be higher than its historical mean while the Excess Return of industry i should be lower than its historical mean, so that the return of portfolio should be positive)
 
+------------------------------------------------------------------------------------------
+
 The methodology of Delta-t portfolio strategy:
+1. Data: 
+Close price of industry indices (for example, in the program accompanying this intro, we used Wind secondary industry indices)
+Close price of stock market indices (we used Shanghai composite index)
 
+2. Find the ratio of excess return:
+Ratio of excess return = Current price of industry index / Current price of overall market index
 
+3. Between any two industry indices, find the time-shifted cross-correlation of excess return: 
+The result should be a vector of tuple (leg, correlation)
+'leg' denote the time that is shifted between the two time series before the correlation is calculated.
+'correlation' denote the cross-correlation derived from the time-shifted data series. 
+
+4. Find the maximum cross-correlation between the two industry indices, and the delta-t corresponding to the maximum correlation. 
+The maximum cross-correlation indicate the significance of the linear dependence of one index on another.
+The delta-t indicate the delay between the movement of one index and the movement of another. Delta-t is also the expected time delay in the future movement of the two indices.
+
+5. Construct a correlation matrix consisted of maximum time-shifted cross-correlation of the industry indices. Construct a delta-t matrix consist of delta-t between any two industry indices. The delta-t indicate the expected delay between the movement of one index and the movement of another.
+
+6. Identify patterns from the two matrix from the preceding procedure. Ideally, the movement of industry indices should form several cycles, but considering the weak correlation between some of the indices, we shall focus only on the strong patterns. 
+Something to be noted about strong patterns:
+	1. correlation shall not be too low between two industries
+	2. delta-t shall neither be too short nor too long
+
+7. Generate trading strategies with the patterns: 
+According to our forward-looking correlation matrix, our delta-t matrix and the pattern we quantitatively identified, we can forecast the movement of a industry index by looking at its neighbors in the cyclic pattern. Using our forward-looking forecast signal, accompanied by stochastic signals and momentum signals, we buy a index when we confirm strong upward potential in it and we sell a index when we confirm strong downward potential in it. 
+
+------------------------------------------------------------------------------------------
+
+The advantages of Delta-t portfolio strategy: 
+1. By long on some of the stocks (or industry ETFs) and short on another bunch of stocks (or industry ETFs), we can, but do not necessarily need to, avoid all systematic risks (both upward risk and downward risk). 
+2. The patterns used by this strategy are well supported by fundamental facts like GDP and CPI. Thus, the patterns are expected to be reliable. 
+3. This strategy is a mid-term trading strategy. The security positions are expected to be held from 3 months to 9 months. Execution cost of this strategy is expected to be low.
