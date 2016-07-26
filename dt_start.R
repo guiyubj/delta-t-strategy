@@ -5,6 +5,7 @@
 
 #get data from Wind
 library(WindR)
+library(TTR)
 w.start()
 cat('Connection status:', w.isconnected(), '\n')
 source('./get_Wind_data.R')
