@@ -12,7 +12,7 @@ source('./get_Wind_data.R')
 
 #import functions
 source('./calc_excess_return.R')
-source('./find_corr_delta_t_matrix.R')
+source('./calc_ccor_delta_t_matrix.R')
 
 # print('Getting data...')
 # w_wsd_data = get_data()

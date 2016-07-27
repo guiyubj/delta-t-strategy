@@ -3,7 +3,7 @@
 #China Asset Management Co.
 #7/26/2016
 
-calc_excess_return <- function(w_wsd_data, w_sh_data) {
+get_excess_return <- function(w_wsd_data, w_sh_data) {
   #copy the dataframe
   excess_return_ratio = w_wsd_data
   excess_return_ratio_SMA = w_wsd_data
@@ -20,7 +20,12 @@ calc_excess_return <- function(w_wsd_data, w_sh_data) {
   return(delta_excess_return)
 }
 
-calc_excess_return_market <- function(w_wsd_data, w_sh_data) {
+get_excess_return_market_ratio <- function(w_wsd_data, w_sh_data) {
+  #copy the dataframe
+  excess_return_ratio = w_wsd_data
+  excess_return_ratio_SMA = w_wsd_data
+  delta_excess_return = w_wsd_data
+  
   len = length(w_wsd_data$Data)
   for (i in 2:len){
     w_wsd_data$Data[i] = w_wsd_data$Data[i] / w_sh_data$Data[2]
