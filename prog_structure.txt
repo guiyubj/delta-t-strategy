@@ -12,8 +12,16 @@ initialize WindR API and print the connection status with Wind server
 dt_run
 run the process as documented in methodology section in 'introduction.txt'
 
-find_corr_delta_matrix
-find a 3-D matrix with three axis. 
+
+
+calc_corr_delta_matrix.R
+#function: calc the correlation-(delta-t) matrix
+#w_wsd_data: data with Wind API data format
+#max_dt: maximum lag time to be claculated
+#(delta_t needs to be limited to a practical range)
+#(if the delta_t to achieve the highest correlation is too long, it becomes meaningless)
+
+calculate a 3-D matrix with three axis. 
 Axis one: a vector of industry index
 Axis two: a vector of industry index (exactly same as axis one)
 Axis three: delta-t (the time shifted between two time series)

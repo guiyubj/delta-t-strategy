@@ -3,34 +3,22 @@
 #China Asset Management Co.
 #7/26/2016
 
-calc_excess_return <- function(w_wsd_data, w_sh_data) {
+calc_excess_return <- function(w_wsd_data, w_sh_data, fastMA, slowMA) {
   #copy the dataframe
-  excess_return_ratio = w_wsd_data
-  excess_return_ratio_SMA = w_wsd_data
-  delta_excess_return = w_wsd_data
-  
-  len = length(w_wsd_data$Data)
-  for (i in 2:len){
-    excess_return_ratio$Data[i] = w_wsd_data$Data[i] / w_sh_data$Data[2]
-    excess_return_ratio_SMA$Data[i] = SMA(excess_return_ratio$Data[i])
-    delta_excess_return$Data[i] = excess_return_ratio$Data[i] 
-    - excess_return_ratio_SMA$Data[i]
-    
-  }
-  return(delta_excess_return)
-}
-
-calc_excess_return_market_ratio <- function(w_wsd_data, w_sh_data) {
-  #copy the dataframe
-  excess_return_ratio = w_wsd_data
-  excess_return_ratio_SMA = w_wsd_data
-  delta_excess_return = w_wsd_data
+  return_ratio = w_wsd_data
+  return_ratio_fastMA = w_wsd_data
+  return_ratio_slowMA = w_wsd_data
+  excess_return = w_wsd_data
   
   #calculate excess return for each data series
-  len = length(w_wsd_data$Data)
-  for (i in c(2:len)){
-    #excess return = industry index / market index
-    w_wsd_data$Data[i] = w_wsd_data$Data[i] / w_sh_data$Data[2]
+  for (i in c(2:length(w_wsd_data$Data))){
+    return_ratio$Data[[i]] = w_wsd_data$Data[[i]] / w_sh_data$Data[[2]]
+    return_ratio_fastMA$Data[[i]] = SMA(return_ratio$Data[[i]], fastMA)
+    return_ratio_slowMA$Data[[i]] = SMA(return_ratio$Data[[i]], slowMA)
+    excess_return$Data[[i]] = (return_ratio_fastMA$Data[[i]] - 
+                                 return_ratio_slowMA$Data[[i]])
+    
   }
-  return(w_wsd_data)
+  
+  return(excess_return)
 }

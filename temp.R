@@ -1,10 +1,14 @@
-
-calc_delayed_cor1 <- function(d_t) {
-  cat('length of syb1:', length(data$Data$'882003.WI'[1:(length(data$Data$'882003.WI') - d_t)]), '\n')
-  cat('length of syb1:', length(data$Data$'882001.WI'[(1 + d_t):length(data$Data$'882001.WI')]), '\n')
-  correlation = 
-    cor(data$Data$'882003.WI'[1:(length(data$Data$'882003.WI') - d_t)], 
-        data$Data$'882001.WI'[(1 + d_t):length(data$Data$'882001.WI')])
+calc_excess_return_market_ratio <- function(w_wsd_data, w_sh_data) {
+  #copy the dataframe
+  excess_return_ratio = w_wsd_data
+  excess_return_ratio_SMA = w_wsd_data
+  delta_excess_return = w_wsd_data
   
-  return(correlation)
+  #calculate excess return for each data series
+  len = length(w_wsd_data$Data)
+  for (i in c(2:len)){
+    #excess return = industry index / market index
+    w_wsd_data$Data[i] = w_wsd_data$Data[i] / w_sh_data$Data[2]
+  }
+  return(w_wsd_data)
 }

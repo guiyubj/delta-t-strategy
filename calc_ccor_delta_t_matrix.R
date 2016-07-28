@@ -43,6 +43,7 @@ calc_ccor_delta_t_matrix <- function(w_wsd_data, max_dt = 180) {
         lst_ccf = ccf(w_wsd_data$Data[[i + 1]],
                       w_wsd_data$Data[[j + 1]],
                       max_delta_t, 
+                      na.action = na.pass, 
                       plot = F)
         mat_ccor[i, j] = max(lst_ccf$acf)
         
