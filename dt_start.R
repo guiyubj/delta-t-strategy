@@ -14,6 +14,9 @@ source('./get_Wind_data.R')
 source('./calc_excess_return.R')
 source('./calc_ccor_delta_t_matrix.R')
 
+#import test functions
+# source('./test_calc_excess_return.R')
+
 # print('Getting data...')
 # w_wsd_data = get_data()
 # print('Done')

@@ -4,7 +4,7 @@
 #7/25/2016
 
 #define parameters
-str_idx = 'pri' #'pri' for Wind primary industry index, 'scd' for Wind secondary industry index
+str_idx = 'scd' #'pri' for Wind primary industry index, 'scd' for Wind secondary industry index
 max_dt = 100 #maximum time delay between two timeseries
 
 
@@ -12,16 +12,15 @@ max_dt = 100 #maximum time delay between two timeseries
 
 #get data
 print('Getting data...')
-vec_idx_code = get_industry_index_list(str_idx)
 w_wsd_data = get_data(str_idx)
 w_sh_data = get_data('sh')
-excess_return_data = get_excess_return_market_ratio(w_wsd_data, w_sh_data)
+excess_return_data = calc_excess_return_market_ratio(w_wsd_data, w_sh_data)
 print('Done')
 
 #calc ccor_dt_matrix
 print('Calculating ccor_dt_matrix...')
 #get the list of cross-correlation matrix and delta-t matrix
-lst_mat_ccor_dt = calc_ccor_delta_t_matrix(excess_return_data, w_sh_data, max_dt, str_idx)
+lst_mat_ccor_dt = calc_ccor_delta_t_matrix(excess_return_data, max_dt)
 #extract cross-correlation matrix
 mat_ccor = lst_mat_ccor_dt[[1]]
 #extract delta-t matrix

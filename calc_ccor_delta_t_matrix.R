@@ -4,12 +4,16 @@
 #7/21/2016
 
 #function: calc the correlation-(delta-t) matrix
-calc_ccor_delta_t_matrix <- function(w_wsd_data, w_sh_data, max_dt = 180, idx = 'scd') {
+#w_wsd_data: data with Wind API data format
+#max_dt: maximum lag time to be claculated
+#(delta_t needs to be limited to a practical range)
+#(if the delta_t to achieve the highest correlation is too long, it becomes meaningless)
+calc_ccor_delta_t_matrix <- function(w_wsd_data, max_dt = 180) {
   #define max_delta_t
   max_delta_t = max_dt
   
   #get data
-  vec_idx_code = get_industry_index_list(idx)
+  vec_idx_code = names(w_wsd_data$Data)[2:length(w_wsd_data$Data)]
   vec_date = w_wsd_data$Data$DATETIME
   
   #create a empty matrix to store cross-correlation
