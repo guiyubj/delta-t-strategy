@@ -16,7 +16,16 @@ print('Getting data...')
 vec_idx_code = get_industry_index_list(str_idx)
 w_wsd_data = get_data(str_idx)
 w_sh_data = get_data('sh')
-excess_return_data = get_excess_return(w_wsd_data, w_sh_data)
-# excess_return_data = get_excess_return_market_ratio(w_wsd_data, w_sh_data)
+excess_return_data = calc_excess_return(w_wsd_data, w_sh_data)
+print('Done')
+
+print('Drawing plots of excess returns...')
+for (i in c(2:length(w_wsd_data$Data))){
+  str_plot_name = paste('./excess_return_plot/', 
+                        'excess_return_', i-1, '.jpg', sep = '')
+  jpeg(str_plot_name, width = 1024, height = 768)
+  plot(excess_return_data$Data[[i]], type = 'l')
+  dev.off()
+}
 print('Done')
 

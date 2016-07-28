@@ -14,6 +14,10 @@ Recover:  economic growth rate up, inflation down;
 Overheat:   economic growth rate up, inflation up;
 Stagnation:   economic growth rate down, inflation up;
 
+The investment clock theory derived two consolidated verdict from historical data: 
+1. Economic phases affect returns among different asset classes.
+2. The returns, although affected by economic phases, move in oscillatory fashions and have tendency to converge to their historical means.
+
 For example, according to SYWG(申银万国)'s research: during reflation stage, bond has the best performance; during recover stage and overheat stage, stock has the best performance; during stagnation stage, cash investments have the best performance.
 
 Similarly, S&P500 components (沪深300 for China Market) can be classified into several industries, and the price indices of the industries have their own phases. In a certain economic phase, some of the industries may achieve higher returns then others. 
@@ -28,7 +32,7 @@ Delta-t portfolio strategy:
 
 The assumptions of Delta-t portfolio strategy:
 1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) has the tendency to converge to its historical mean. 
-2. The excess returns of investments in industries move in a oscillatory fashion.
+2. The excess returns of investments in industries move in oscillatory fashions.
 3. The ratios of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
 
 ------------------------------------------------------------------------------------------
