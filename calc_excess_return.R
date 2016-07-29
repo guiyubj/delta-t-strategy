@@ -22,3 +22,16 @@ calc_excess_return <- function(w_wsd_data, w_sh_data, fastMA, slowMA) {
   
   return(excess_return)
 }
+
+calc_return_market_ratio <- function(w_wsd_data, w_sh_data) {
+  #copy the dataframe
+  return_ratio = w_wsd_data
+  
+  #calculate excess return for each data series
+  len = length(w_wsd_data$Data)
+  for (i in c(2:len)){
+    #excess return = industry index / market index
+    return_ratio[[i]] = w_wsd_data$Data[[i]] / w_sh_data$Data[[2]]
+  }
+  return(return_ratio)
+}

@@ -7,6 +7,8 @@
 str_idx = 'pri' #'pri' for SYWG primary industry index, 'scd' for SYWG secondary industry index, 'wpri' for Wind industry index, 'wscd' for Wind secondary industry index
 max_dt = 100 #maximum time delay between two timeseries
 
+fastMA = 10
+slowMA = 100
 
 #run the whole process
 
@@ -14,7 +16,7 @@ max_dt = 100 #maximum time delay between two timeseries
 print('Getting data...')
 w_wsd_data = get_data(str_idx)
 w_sh_data = get_data('sh')
-excess_return_data = calc_excess_return(w_wsd_data, w_sh_data)
+excess_return_data = calc_excess_return(w_wsd_data, w_sh_data, fastMA, slowMA)
 print('Done')
 
 #calc ccor_dt_matrix
@@ -28,7 +30,9 @@ mat_dt = lst_mat_ccor_dt[[2]]
 print('Done')
 
 #write the matrices to csv
-str_csv_name = paste('./result/ccor_dt_matrix_', str_idx, max_dt, '.csv', sep = '')
+str_csv_name = paste('./result/ccor_dt_matrix_', 
+                     str_idx, '_dt', max_dt, '_fast', fastMA, '_slow', slowMA, 
+                     '.csv', sep = '')
 write.csv(lst_mat_ccor_dt, str_csv_name)
 print(paste('Written to CSV:', str_csv_name))
 

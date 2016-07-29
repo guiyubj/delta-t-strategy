@@ -8,6 +8,8 @@
 str_idx = 'pri' #'pri' for SYWG primary industry index, 'scd' for SYWG secondary industry index, 'wpri' for Wind industry index, 'wscd' for Wind secondary industry index
 max_dt = 100 #maximum time delay between two timeseries
 
+fastMA = 10
+slowMA = 100
 
 #run the whole process
 
@@ -16,15 +18,19 @@ print('Getting data...')
 vec_idx_code = get_industry_index_list(str_idx)
 w_wsd_data = get_data(str_idx)
 w_sh_data = get_data('sh')
-excess_return_data = calc_excess_return(w_wsd_data, w_sh_data, 10, 100)
+excess_return_data = calc_excess_return(w_wsd_data, w_sh_data, fastMA, slowMA)
 print('Done')
 
 print('Drawing plots of excess returns...')
 for (i in c(2:length(excess_return_data$Data))){
-  str_plot_name = paste('./excess_return_plot/', 'excess_return_', 
+  str_plot_name = paste('./excess_return_MAD_plot/', 
+                        'fast', fastMA, '_slow', slowMA, '/', 
+                        'excess_return_MAD', 
+                        '_f', fastMA, '_s', slowMA, '_', 
                         names(excess_return_data$Data[i]), '.jpg', sep = '')
   jpeg(str_plot_name, width = 1024, height = 768)
-  plot(excess_return_data$Data[[i]], type = 'l', 
+  plot(excess_return_data$Data[[1]], 
+       excess_return_data$Data[[i]], type = 'l', 
        main = names(excess_return_data$Data[i]))
   dev.off()
 }
