@@ -57,7 +57,9 @@ The index/market ratio filters the systematic risk factor from excess return cal
 The long-term moving average represent the long-term industrial trend mainly affected by the development of economy and the adjustment of economic structure. 
 The short-term moving average represent the near-term return of the industry, mainly affected by economical phase changes.
 
-When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-normal return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and within the cycle, the excess return converge to zero at least for once. 
+When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-mean return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and, within the cycle, the excess return converges to zero at least for once. 
+
+For the calculated excess return to make sense, we need to adjust the fast and slow MA period, so that they can filter noises effectively and remain the trend. 
 
 3. Between any two industry indices, find the time-shifted cross-correlation of excess return: 
 The result should be a vector of tuple (leg, correlation)
