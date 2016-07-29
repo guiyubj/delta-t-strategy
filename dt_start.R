@@ -1,6 +1,7 @@
 #dt_start
 #Yu Gui
 #China Asset Management Co.
+#Quantitative Investment Division
 #7/21/2016
 
 #get data from Wind
@@ -13,9 +14,9 @@ source('./get_Wind_data.R')
 #import functions
 source('./calc_excess_return.R')
 source('./calc_ccor_delta_t_matrix.R')
+source('./calc_trading_pairs.R')
 
 #import test functions
-# source('./test_calc_excess_return.R')
 
 # print('Getting data...')
 # w_wsd_data = get_data()

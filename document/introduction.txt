@@ -54,12 +54,16 @@ excess return = short-term SMA(ratio of return) - long-term SMA(ratio of return)
 
 We used Moving Average Divergence as an indicator of excess return. 
 The index/market ratio filters the systematic risk factor from excess return calculation. 
-The long-term moving average represent the long-term industrial trend mainly affected by the development of economy and the adjustment of economic structure. 
 The short-term moving average represent the near-term return of the industry, mainly affected by economical phase changes.
+The long-term moving average represent the long-term industrial trend mainly affected by the development of economy and the adjustment of economic structure. 
 
-When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-mean return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and, within the cycle, the excess return converges to zero at least for once. 
+The short-term moving average uses fast moving average period (1 - 14 days) to filter near-term noise, e.g. bulk sell-off at the date.
+The long-term moving average uses slow moving average period (180 - 720 days) to filter long-term structural trend, e.g. tech sector and service sector are taking on more profitability yoy, and they are going to continue doing so; thus, the long-term trend of profitability shell not be considered as a result of economic phases.
+The difference between the two moving average contains the remaining information (filtered by slowMA filter, but not filtered by fastMA filter): the effect of current economic phase on the industries. 
 
-For the calculated excess return to make sense, we need to adjust the fast and slow MA period, so that they can filter noises effectively and remain the trend. 
+When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-mean return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and, within the cycle, the excess return will converge to zero at least for once. 
+For the calculated excess return to make sense, we need to adjust the fast and slow MA period, so that they can filter noises effectively and, more importantly, remain the effects of economic phases. 
+Please refer to the graphs in folder '~/excess_return_MAD_plot/' for visualization of excess returns under different fastMA and slowMA. 
 
 3. Between any two industry indices, find the time-shifted cross-correlation of excess return: 
 The result should be a vector of tuple (leg, correlation)

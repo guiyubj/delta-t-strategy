@@ -1,6 +1,7 @@
 #calc_ccor_delta_t_matrix
 #Yu Gui
 #China Asset Management Co.
+#Quantitative Investment Division
 #7/21/2016
 
 #function: calc the correlation-(delta-t) matrix
@@ -8,6 +9,7 @@
 #max_dt: maximum lag time to be claculated
 #(delta_t needs to be limited to a practical range)
 #(if the delta_t to achieve the highest correlation is too long, it becomes meaningless)
+#return: a list of two matrix: (max ccor matrix, lag matrix)
 calc_ccor_delta_t_matrix <- function(w_wsd_data, max_dt = 180) {
   #define max_delta_t
   max_delta_t = max_dt

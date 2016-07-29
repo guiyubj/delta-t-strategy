@@ -1,4 +1,4 @@
-#dt_run
+#test_calc_ccor_delta_matrix
 #Yu Gui
 #China Asset Management Co.
 #Quantitative Investment Division
@@ -9,8 +9,7 @@ str_idx = 'pri' #'pri' for SYWG primary industry index, 'scd' for SYWG secondary
 max_dt = 200 #maximum time delay between two timeseries
 
 fastMA = 10
-slowMA = 360
-
+slowMA = 900
 
 #run the whole process
 
@@ -22,7 +21,6 @@ excess_return_data = calc_excess_return_MAD(w_wsd_data, w_hs300_data,
                                             fastMA, slowMA)
 print('Done')
 
-
 #calc ccor_dt_matrix
 print('Calculating ccor_dt_matrix...')
 #get the list of cross-correlation matrix and delta-t matrix
@@ -33,11 +31,10 @@ mat_ccor = lst_mat_ccor_dt[[1]]
 mat_dt = lst_mat_ccor_dt[[2]]
 print('Done')
 
-#calc trading pairs
-print('Calculating trading pairs...')
-lst_trading_pairs = calc_trading_pairs(mat_ccor, mat_dt)
-print('Done')
-
-print(lst_trading_pairs)
-
+#write the matrices to csv
+str_csv_name = paste('./ccor_dt_matrix/ccor_dt_matrix_', 
+                     str_idx, '_dt', max_dt, '_fast', fastMA, '_slow', slowMA, 
+                     '.csv', sep = '')
+write.csv(lst_mat_ccor_dt, str_csv_name)
+print(paste('Written to CSV:', str_csv_name))
 

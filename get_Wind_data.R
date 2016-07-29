@@ -1,6 +1,7 @@
 #get_Wind_data
 #Yu Gui
 #China Asset Management Co.
+#Quantitative Investment Division
 #7/20/2016
 
 #function: generate a vector of industry index codes
