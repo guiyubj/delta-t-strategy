@@ -45,11 +45,19 @@ Return of portfolio = Excess Return of industry j - Excess Return of industry i.
 
 The methodology of Delta-t portfolio strategy:
 1. Data: 
-Close price of industry indices (for example, in the program accompanying this intro, we used Wind secondary industry indices)
-Close price of stock market indices (we used Shanghai composite index)
+Close price of industry indices (for example, in the program accompanying this intro, we used SYWG primary industry indices)
+Close price of stock market indices (we used Shanghai & Shenzhen select 300 index)
 
-2. Find the ratio of excess return:
-Ratio of excess return = Current price of industry index / Current price of overall market index
+2. Find excess returns:
+Ratio of return = Current price of industry index / Current price of overall market index
+excess return = short-term SMA(ratio of return) - long-term SMA(ratio of return)
+
+We used Moving Average Divergence as an indicator of excess return. 
+The index/market ratio filters the systematic risk factor from excess return calculation. 
+The long-term moving average represent the long-term industrial trend mainly affected by the development of economy and the adjustment of economic structure. 
+The short-term moving average represent the near-term return of the industry, mainly affected by economical phase changes.
+
+When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-normal return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and within the cycle, the excess return converge to zero at least for once. 
 
 3. Between any two industry indices, find the time-shifted cross-correlation of excess return: 
 The result should be a vector of tuple (leg, correlation)
