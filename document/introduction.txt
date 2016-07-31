@@ -22,23 +22,31 @@ For example, according to SYWG(申银万国)'s research: during reflation stage,
 
 Similarly, S&P500 components (沪深300 for China Market) can be classified into several industries, and the price indices of the industries have their own phases. In a certain economic phase, some of the industries may achieve higher returns then others. 
 
-We assume that the current phase may affect a certain industry's current excess return (current return of the industry investment - current return of the overall market). With the change of economic phase, the expectation of excess return of a industry is also changed. Thus, with the change of economic phase, the excess return of a certain industry may go beyond its historical mean (when the economic stage have positive effects on the industry), and may go below its historical mean (when the economic stage have negative effects on the industry). 
+We assume that the current phase may affect a certain industry's nominal excess return (current return of the industry investment - current return of the overall market). With the change of economic phase, the expectation of excess return of a industry is also changed. Thus, with the change of economic phase, the excess return of a certain industry may go beyond its historical mean (when the economic stage have positive effects on the industry), and may go below its historical mean (when the economic stage have negative effects on the industry). 
 
 ------------------------------------------------------------------------------------------
 
 Delta-t portfolio strategy:
 
 ------------------------------------------------------------------------------------------
+Definitions: 
+1. Excess Return:
+Excess return: short-term SMA(Industry Index / Market Index) - long-term SMA(Industry Index / Market Index)
+In term of this document, Excess Return represent the difference between the stochastic fluctuation of the price of a security around its long-tern trend and the fair price according to the long-term trend of the price of the security. 
+In short words, Excess Return is a portion of the price of a security which is "unfair" due to short-term over-valuation and under-valuation of the security. 
+
+------------------------------------------------------------------------------------------
 
 The assumptions of Delta-t portfolio strategy:
-1. The excess return of investment in a certain industry (return of the industry investment - return of the overall market) has the tendency to converge to its historical mean. 
-2. The excess returns of investments in industries move in oscillatory fashions.
-3. The ratios of the excess returns of investments in different industries are highly correlated, but such correlations are achieved with reasonable time delays (delta-t).
+1. The prices of industry indices are periodically over-valuated and under-valuated due to economical phases. 
+2. The excess return of investment in industries have the tendency to converge to their historical mean. 
+3. The excess returns of investments in industries move in oscillatory fashions.
+4. The ratios of the excess returns of investments in different industries are highly correlated, and such correlations may be achieved with reasonable time delays (delta-t).
 
 ------------------------------------------------------------------------------------------
 
 The return of Delta-t portfolio strategy:
-Return of portfolio = Excess Return of industry j - Excess Return of industry i.
+Return of portfolio = Excess Return of industry j (long) - Excess Return of industry i (short).
 (In desirable scenario, the Excess Return of industry j should be higher than its historical mean while the Excess Return of industry i should be lower than its historical mean, so that the return of portfolio should be positive)
 
 ------------------------------------------------------------------------------------------
@@ -49,13 +57,12 @@ Close price of industry indices (for example, in the program accompanying this i
 Close price of stock market indices (we used Shanghai & Shenzhen select 300 index)
 
 2. Find excess returns:
-Ratio of return = Current price of industry index / Current price of overall market index
-excess return = short-term SMA(ratio of return) - long-term SMA(ratio of return)
+Excess return: short-term SMA(Industry Index / Market Index) - long-term SMA(Industry Index / Market Index)
 
 We used Moving Average Divergence as an indicator of excess return. 
 The index/market ratio filters the systematic risk factor from excess return calculation. 
 The short-term moving average represent the near-term return of the industry, mainly affected by economical phase changes.
-The long-term moving average represent the long-term industrial trend mainly affected by the development of economy and the adjustment of economic structure. 
+The long-term moving average represent the long-term industry trend mainly affected by the development of economy and the adjustment of economic structure. 
 
 The short-term moving average uses fast moving average period (1 - 14 days) to filter near-term noise, e.g. bulk sell-off at the date.
 The long-term moving average uses slow moving average period (180 - 720 days) to filter long-term structural trend, e.g. tech sector and service sector are taking on more profitability yoy, and they are going to continue doing so; thus, the long-term trend of profitability shell not be considered as a result of economic phases.
