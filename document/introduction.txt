@@ -32,8 +32,14 @@ Delta-t portfolio strategy:
 Definitions: 
 1. Excess Return:
 Excess return: short-term SMA(Industry Index / Market Index) - long-term SMA(Industry Index / Market Index)
-In term of this document, Excess Return represent the difference between the stochastic fluctuation of the price of a security around its long-tern trend and the fair price according to the long-term trend of the price of the security. 
+In terms of this document, Excess Return represent the difference between the stochastic fluctuation of the price of a security around its long-tern trend and the fair price according to the long-term trend of the price of the security. 
 In short words, Excess Return is a portion of the price of a security which is "unfair" due to short-term over-valuation and under-valuation of the security. 
+
+2. Cross correlation: 
+"In signal processing, cross-correlation is a measure of similarity of two series as a function of the lag of one relative to the other. This is also known as a sliding dot product or sliding inner-product. It is commonly used for searching a long signal for a shorter, known feature." ------ Wikipedia (Reference: Wikipedia)
+
+3. Delta-t:
+Delta-t is the lag between two time series when the cross correlation of the two time series reaches maximum.
 
 ------------------------------------------------------------------------------------------
 
@@ -47,7 +53,7 @@ The assumptions of Delta-t portfolio strategy:
 
 The return of Delta-t portfolio strategy:
 Return of portfolio = Excess Return of industry j (long) - Excess Return of industry i (short).
-(In desirable scenario, the Excess Return of industry j should be higher than its historical mean while the Excess Return of industry i should be lower than its historical mean, so that the return of portfolio should be positive)
+(In desirable scenario, the Excess Return of industry j should be higher than zero while the Excess Return of industry i should be lower than zero, so that the return of portfolio should be positive)
 
 ------------------------------------------------------------------------------------------
 
@@ -64,17 +70,17 @@ The index/market ratio filters the systematic risk factor from excess return cal
 The short-term moving average represent the near-term return of the industry, mainly affected by economical phase changes.
 The long-term moving average represent the long-term industry trend mainly affected by the development of economy and the adjustment of economic structure. 
 
-The short-term moving average uses fast moving average period (1 - 14 days) to filter near-term noise, e.g. bulk sell-off at the date.
-The long-term moving average uses slow moving average period (180 - 720 days) to filter long-term structural trend, e.g. tech sector and service sector are taking on more profitability yoy, and they are going to continue doing so; thus, the long-term trend of profitability shell not be considered as a result of economic phases.
-The difference between the two moving average contains the remaining information (filtered by slowMA filter, but not filtered by fastMA filter): the effect of current economic phase on the industries. 
+The short-term moving average uses fast moving average period (1 - 14 days) to filter near-term noise, e.g. bulk sell-off at a certain date.
+The long-term moving average uses slow moving average period (180 - 720 days) to filter long-term structural trend, e.g. tech sector and service sector are taking on more profitability yoy, and they are going to continue doing so; thus, the long-term trend of profitability shell not be considered as a result of economic phases effects.
+The difference between the two moving average contains the remaining information (filtered by slowMA filter and fastMA filter): the effect of current economic phase on the industries. 
 
-When short-term, market-adjusted moving average goes beyond the long-term, market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-mean return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and, within the cycle, the excess return will converge to zero at least for once. 
+When short-term market-adjusted moving average goes beyond the long-term market-adjusted moving average, excess return is positive. Positive excess return means that the subject industry is enjoying a higher-than-historical-mean return, and vice versa. Considering the length of time that we are measuring the long and short term MAs, we assume that the excess return calculated by MAD method will complete a cycle within the long term and, within the cycle, the excess return will converge to zero at least for once. 
 For the calculated excess return to make sense, we need to adjust the fast and slow MA period, so that they can filter noises effectively and, more importantly, remain the effects of economic phases. 
-Please refer to the graphs in folder '~/excess_return_MAD_plot/' for visualization of excess returns under different fastMA and slowMA. 
+Please refer to the graphs in folder "~/excess_return_MAD_plot/" for visualization of excess returns under different fastMA and slowMA. 
 
 3. Between any two industry indices, find the time-shifted cross-correlation of excess return: 
-The result should be a vector of tuple (leg, correlation)
-'leg' denote the time that is shifted between the two time series before the correlation is calculated.
+The result should be a vector of tuple (lag, correlation)
+'lag' denote the time that is shifted between the two time series before the correlation is calculated.
 'correlation' denote the cross-correlation derived from the time-shifted data series. 
 
 4. Find the maximum cross-correlation between the two industry indices, and the delta-t corresponding to the maximum correlation. 
@@ -88,12 +94,19 @@ Something to be noted about strong patterns:
 	1. correlation shall not be too low between two industries
 	2. delta-t shall neither be too short nor too long
 
+	In the program accompanying this document, we used three filters to find trading pairs:
+	1. minimum cross-correlation
+	2. minimum delta-t
+	3. maximum delta-t
+
+	Please refer to "~/comparison_plot/" for visualization of excess return of trading pairs
+
 7. Generate trading strategies with the patterns: 
-According to our forward-looking correlation matrix, our delta-t matrix and the pattern we quantitatively identified, we can forecast the movement of a industry index by looking at its neighbors in the cyclic pattern. Using our forward-looking forecast signal, accompanied by stochastic signals and momentum signals, we buy a index when we confirm strong upward potential in it and we sell a index when we confirm strong downward potential in it. 
+According to our cross correlation matrix, our delta-t matrix and the pattern we quantitatively identified, we can forecast the movement of a industry index by looking at its neighbors in the cyclic pattern. Using our forward-looking forecast signal, accompanied by stochastic signals and momentum signals, we buy a index when we confirm strong upward potential in it and we sell a index when we confirm strong downward potential in it. 
 
 ------------------------------------------------------------------------------------------
 
 The advantages of Delta-t portfolio strategy: 
 1. By long on some of the stocks (or industry ETFs) and short on another bunch of stocks (or industry ETFs), we can, but do not necessarily need to, avoid all systematic risks (both upward risk and downward risk). 
-2. The patterns used by this strategy are well supported by fundamental facts like GDP and CPI. Thus, the patterns are expected to be reliable. 
+2. The patterns used by this strategy are well supported by fundamental facts like GDP and CPI (if we spare our time to analyze them). Thus, the patterns are expected to be reliable. 
 3. This strategy is a mid-term trading strategy. The security positions are expected to be held from 3 months to 9 months. Execution cost of this strategy is expected to be low.

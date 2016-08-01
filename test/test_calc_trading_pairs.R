@@ -6,14 +6,14 @@
 
 #define parameters
 str_idx = 'pri' #'pri' for SYWG primary industry index, 'scd' for SYWG secondary industry index, 'wpri' for Wind industry index, 'wscd' for Wind secondary industry index
-max_dt = 200 #maximum time delay between two timeseries
 
 fastMA = 10
 slowMA = 360
 
+min_dt = 20
+max_dt = 500 #maximum time lag between two timeseries
+
 min_ccor = 0.5
-min_dt = 3
-max_dt = 300
 
 
 #run the whole process
@@ -55,25 +55,33 @@ print('Done')
 
 #write tradable matrix to CSV
 str_csv_name = paste('./trading_pairs/mat_tradable_', 
-                     str_idx, '_dt', max_dt, '_fast', fastMA, '_slow', slowMA, 
+                     str_idx,
+                     '_min_ccor_', min_ccor, 
+                     '_min_dt_', min_dt, '_max_dt_', max_dt, 
+                     '_fast_', fastMA, '_slow_', slowMA, 
                      '.csv', sep = '')
 write.csv(mat_tradable, str_csv_name)
 print(paste('Written to CSV:', str_csv_name))
 
 #write trading pairs list to txt
 str_txt_name = paste('./trading_pairs/vec_trading_pairs_', 
-                     str_idx, '_dt', max_dt, '_fast', fastMA, '_slow', slowMA, 
+                     str_idx,
+                     '_min_ccor_', min_ccor, 
+                     '_min_dt_', min_dt, '_max_dt_', max_dt, 
+                     '_fast_', fastMA, '_slow_', slowMA, 
                      '.txt', sep = '')
 write(vec_trading_pairs, str_txt_name)
 print(paste('Written to CSV:', str_txt_name))
 
 
-#draw comparision plots
-print('Drawing comparision plots...')
+#draw comparison plots
+print('Drawing comparison plots...')
 counter = 1
 for (i in lst_trading_pairs_code){
-  str_plot_dir = paste('./comparision_plot/',
-                       'fast', fastMA, '_slow', slowMA, 
+  str_plot_dir = paste('./comparison_plot/', str_idx, 
+                       '_min_ccor_', min_ccor, '_min_dt_', min_dt, 
+                       '_max_dt_', max_dt, 
+                       '_fast_', fastMA, '_slow_', slowMA, 
                        sep = '')
   dir.create(str_plot_dir, showWarnings = FALSE)
   str_plot_name = paste(str_plot_dir, '/', 
@@ -85,8 +93,13 @@ for (i in lst_trading_pairs_code){
        excess_return_data$Data[[i[[1]] + 1]],
        type = 'l', col = 'red',
        main = paste(names(excess_return_data$Data[i[[1]] + 1]), 'red', 
-                    names(excess_return_data$Data[i[[2]] + 1]), 'blue', 
-                    '_f', fastMA, '_s', slowMA))
+                    names(excess_return_data$Data[i[[2]] + 1]), 'blue', '\n', 
+                    'ccor_', round(mat_ccor[i[[1]], i[[2]]], 3), 
+                    '_dt_', mat_dt[i[[1]], i[[2]]], 
+                    '_f', fastMA, '_s', slowMA, '\n', 
+                    'red lags blue by', mat_dt[i[[1]], i[[2]]], 'days'
+                    )
+       )
   lines(excess_return_data$Data[[1]],
         excess_return_data$Data[[i[[2]] + 1]],
         col = 'blue')
