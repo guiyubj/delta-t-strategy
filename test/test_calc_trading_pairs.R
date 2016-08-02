@@ -2,12 +2,12 @@
 #Yu Gui
 #China Asset Management Co.
 #Quantitative Investment Division
-#7/25/2016
+#8/2/2016
 
 #define parameters
 str_idx = 'pri' #'pri' for SYWG primary industry index, 'scd' for SYWG secondary industry index, 'wpri' for Wind industry index, 'wscd' for Wind secondary industry index
 
-fastMA = 10
+fastMA = 20
 slowMA = 360
 
 min_dt = 20
@@ -20,9 +20,9 @@ min_ccor = 0.5
 
 #get data
 print('Getting data...')
-w_wsd_data = get_data(str_idx)
-w_hs300_data = get_data('hs300')
-excess_return_data = calc_excess_return_MAD(w_wsd_data, w_hs300_data, 
+wsd_data = get_data(str_idx)$Data
+hs300_data = get_data('hs300')$Data
+excess_return_data = calc_excess_return_MAD(wsd_data, hs300_data, 
                                             fastMA, slowMA)
 print('Done')
 
@@ -42,7 +42,7 @@ str_csv_name = paste('./ccor_dt_matrix/ccor_dt_matrix_',
                      str_idx, '_dt', max_dt, '_fast', fastMA, '_slow', slowMA, 
                      '.csv', sep = '')
 write.csv(lst_mat_ccor_dt, str_csv_name)
-print(paste('Written to CSV:', str_csv_name))
+print(paste('mat_ccor_dt written to CSV:', str_csv_name))
 
 #calc trading pairs
 print('Calculating trading pairs...')
@@ -61,7 +61,7 @@ str_csv_name = paste('./trading_pairs/mat_tradable_',
                      '_fast_', fastMA, '_slow_', slowMA, 
                      '.csv', sep = '')
 write.csv(mat_tradable, str_csv_name)
-print(paste('Written to CSV:', str_csv_name))
+print(paste('mat_tradable written to CSV:', str_csv_name))
 
 #write trading pairs list to txt
 str_txt_name = paste('./trading_pairs/vec_trading_pairs_', 
@@ -71,8 +71,7 @@ str_txt_name = paste('./trading_pairs/vec_trading_pairs_',
                      '_fast_', fastMA, '_slow_', slowMA, 
                      '.txt', sep = '')
 write(vec_trading_pairs, str_txt_name)
-print(paste('Written to CSV:', str_txt_name))
-
+print(paste('lst_trading_pairs written to txt:', str_txt_name))
 
 #draw comparison plots
 print('Drawing comparison plots...')
@@ -89,19 +88,19 @@ for (i in lst_trading_pairs_code){
                         '_f', fastMA, '_s', slowMA, '_',
                         counter, '.jpg', sep = '')
   jpeg(str_plot_name, width = 1024, height = 768)
-  plot(excess_return_data$Data[[1]],
-       excess_return_data$Data[[i[[1]] + 1]],
+  plot(excess_return_data[[1]],
+       excess_return_data[[i[[1]] + 1]],
        type = 'l', col = 'red',
-       main = paste(names(excess_return_data$Data[i[[1]] + 1]), 'red', 
-                    names(excess_return_data$Data[i[[2]] + 1]), 'blue', '\n', 
+       main = paste(names(excess_return_data[i[[1]] + 1]), 'red', 
+                    names(excess_return_data[i[[2]] + 1]), 'blue', '\n', 
                     'ccor_', round(mat_ccor[i[[1]], i[[2]]], 3), 
                     '_dt_', mat_dt[i[[1]], i[[2]]], 
                     '_f', fastMA, '_s', slowMA, '\n', 
                     'red lags blue by', mat_dt[i[[1]], i[[2]]], 'days'
                     )
        )
-  lines(excess_return_data$Data[[1]],
-        excess_return_data$Data[[i[[2]] + 1]],
+  lines(excess_return_data[[1]],
+        excess_return_data[[i[[2]] + 1]],
         col = 'blue')
   dev.off()
   counter = counter + 1

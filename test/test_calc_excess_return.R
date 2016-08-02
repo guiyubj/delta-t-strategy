@@ -16,23 +16,23 @@ slowMA = 360
 #get data
 print('Getting data...')
 vec_idx_code = get_industry_index_list(str_idx)
-w_wsd_data = get_data(str_idx)
-w_hs300_data = get_data('hs300')
+w_wsd_data = get_data(str_idx)$Data
+w_hs300_data = get_data('hs300')$Data
 excess_return_data = calc_excess_return_MAD(w_wsd_data, w_hs300_data, 
                                             fastMA, slowMA)
 print('Done')
 
 print('Drawing plots of excess returns...')
-for (i in c(2:length(excess_return_data$Data))){
+for (i in c(2:length(excess_return_data))){
   str_plot_name = paste('./excess_return_MAD_plot/', 
                         'fast', fastMA, '_slow', slowMA, '/', 
                         'excess_return_MAD', 
                         '_f', fastMA, '_s', slowMA, '_', 
-                        names(excess_return_data$Data[i]), '.jpg', sep = '')
+                        names(excess_return_data[i]), '.jpg', sep = '')
   jpeg(str_plot_name, width = 1024, height = 768)
-  plot(excess_return_data$Data[[1]], 
-       excess_return_data$Data[[i]], type = 'l', 
-       main = paste(names(excess_return_data$Data[i]), 
+  plot(excess_return_data[[1]], 
+       excess_return_data[[i]], type = 'l', 
+       main = paste(names(excess_return_data[i]), 
                     '_f', fastMA, '_s', slowMA))
   dev.off()
 }

@@ -1,4 +1,4 @@
-#test calc_trading_pairs
+#dt run
 #Yu Gui
 #China Asset Management Co.
 #Quantitative Investment Division
@@ -20,9 +20,9 @@ min_ccor = 0.5
 
 #get data
 print('Getting data...')
-w_wsd_data = get_data(str_idx)
-w_hs300_data = get_data('hs300')
-excess_return_data = calc_excess_return_MAD(w_wsd_data, w_hs300_data, 
+wsd_data = get_data(str_idx)$Data
+hs300_data = get_data('hs300')$Data
+excess_return_data = calc_excess_return_MAD(wsd_data, hs300_data, 
                                             fastMA, slowMA)
 print('Done')
 
