@@ -15,6 +15,7 @@ source('./get_Wind_data.R')
 source('./calc_excess_return.R')
 source('./calc_ccor_delta_t_matrix.R')
 source('./calc_trading_pairs.R')
+source('./calc_follower_list.R')
 
 #import test functions
 

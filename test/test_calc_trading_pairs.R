@@ -1,4 +1,4 @@
-#dt_run
+#test calc_trading_pairs
 #Yu Gui
 #China Asset Management Co.
 #Quantitative Investment Division
